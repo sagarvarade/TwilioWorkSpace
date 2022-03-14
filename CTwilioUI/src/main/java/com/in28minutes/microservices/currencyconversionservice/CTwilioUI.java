@@ -9,7 +9,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class CTwilioUI {
 
 	public static void main(String[] args) {
+		System.out.println(" app Start ");
 		SpringApplication.run(CTwilioUI.class, args);
 	}
+	
 
 }
