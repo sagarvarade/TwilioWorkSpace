@@ -6,11 +6,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class CTwilioUI {
+public class ctwilioui {
 
 	public static void main(String[] args) {
 		System.out.println(" app Start ");
-		SpringApplication.run(CTwilioUI.class, args);
+		SpringApplication.run(ctwilioui.class, args);
 	}
 	
 

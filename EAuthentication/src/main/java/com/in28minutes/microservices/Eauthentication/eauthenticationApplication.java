@@ -1,13 +1,13 @@
-package com.in28minutes.microservices.currencyexchangeservice;
+package com.in28minutes.microservices.Eauthentication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DTwiliobackend {
+public class eauthenticationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DTwiliobackend.class, args);
+		SpringApplication.run(eauthenticationApplication.class, args);
 	}
 
 }
