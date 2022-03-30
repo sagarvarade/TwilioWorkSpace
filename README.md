@@ -27,3 +27,24 @@ Application details <br>
 	POST	
  	http://localhost:8200/issuetoken : will issue token for this user:
 	{"username":"anna",	"password":"pass"	}
+
+
+
+
+http://localhost:8765/ctwilioui/currency-conversion-feign/from/USD/INR/quantity/200
+
+
+http://localhost:8765/dtwiliobackend/currency-exchange/from/USD/INR
+
+
+To build Docker Application
+Build as maven project Goals :  spring-boot:build-image -DSkipTests
+
+docker.io/sv/twilioprj-eauthentication:0.0.1-SNAPSHOT
+
+
+docker run -p 8765:8761 sv/twilioprj-anaming-server:0.0.1-SNAPSHOT
+
+docker run -p 8765:8765 sv/twilioprj-bapi-gateway:0.0.1-SNAPSHOT
+
+docker run -p 8100:8100 sv/twilioprj-ctwilioui:0.0.1-SNAPSHOT
