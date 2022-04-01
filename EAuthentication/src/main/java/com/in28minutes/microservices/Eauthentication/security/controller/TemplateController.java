@@ -87,6 +87,7 @@ public class TemplateController {
     @PostMapping("issuetoken")
     public String getTokenForUser(@RequestBody TokenDetails token1) {
     	System.out.println("token  "+token1);
+    	String token="";
     	try {
 			RestTemplate restTemplate = new RestTemplate();
 	        
@@ -100,9 +101,10 @@ public class TemplateController {
 			org.springframework.http.HttpHeaders headers = result.getHeaders();
 	        System.out.println("headers String "+headers);
 	        System.out.println("headers String "+headers.get("Authorization"));
+	        token=headers.get("Authorization").get(0);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-    	return "xx";
+    	return token;
     }
 }
