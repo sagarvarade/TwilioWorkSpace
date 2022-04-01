@@ -48,3 +48,6 @@ docker run -p 8765:8761 sv/twilioprj-anaming-server:0.0.1-SNAPSHOT
 docker run -p 8765:8765 sv/twilioprj-bapi-gateway:0.0.1-SNAPSHOT
 
 docker run -p 8100:8100 sv/twilioprj-ctwilioui:0.0.1-SNAPSHOT
+
+
+To run docker compose  , go to same folder and use  : docker-compose up			
