@@ -2,7 +2,7 @@ version: '3.7'
 services:
 
   rabbitmq:
-    image: rabbitmq:3.5.3-management
+    image: rabbitmq:latest
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -18,18 +18,19 @@ services:
     restart: always
     networks:
       - twilio-network
+
   naming-server:
-  #[INFO] Successfully built image 'docker.io/sv/twilioprj-anaming-server:0.0.1-SNAPSHOT'
     image: sv/twilioprj-anaming-server:0.0.1-SNAPSHOT
+    mem_limit: 700m
     ports:
       - "8761:8761"
-    restart: always
     networks:
       - twilio-network
       
   bapi-gateway:
   #[INFO] Successfully built image 'docker.io/sv/twilioprj-bapi-gateway:0.0.1-SNAPSHOT'
     image: sv/twilioprj-bapi-gateway:0.0.1-SNAPSHOT
+    mem_limit: 700m
     ports:
       - "8765:8765"
     restart: always
@@ -38,11 +39,13 @@ services:
     depends_on:
       - naming-server
     environment:
-      - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE:http://naming-server:8761/eureka
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
       
   ctwilioui:
   #[INFO] Successfully built image 'docker.io/sv/twilioprj-ctwilioui:0.0.1-SNAPSHOT'
     image: sv/twilioprj-ctwilioui:0.0.1-SNAPSHOT
+    mem_limit: 700m
     ports:
       - "8100:8100"
     restart: always
@@ -51,11 +54,13 @@ services:
     depends_on:
       - naming-server
     environment:
-      - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE:http://naming-server:8761/eureka
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
   
   dtwiliobackend:
   #[INFO] Successfully built image 'docker.io/sv/twilioprj-dtwiliobackend:0.0.1-SNAPSHOT'
     image: sv/twilioprj-dtwiliobackend:0.0.1-SNAPSHOT
+    mem_limit: 700m
     ports:
       - "8000:8000"
     restart: always
@@ -64,11 +69,13 @@ services:
     depends_on:
       - naming-server
     environment:
-      - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE:http://naming-server:8761/eureka
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
   
   eauthentication:
   #[INFO] Successfully built image 'docker.io/sv/twilioprj-eauthentication:0.0.1-SNAPSHOT'
     image: sv/twilioprj-eauthentication:0.0.1-SNAPSHOT
+    mem_limit: 700m
     ports:
       - "8200:8200"
     restart: always
@@ -77,7 +84,8 @@ services:
     depends_on:
       - naming-server
     environment:
-      - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE:http://naming-server:8761/eureka
-
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      
 networks:
   twilio-network:

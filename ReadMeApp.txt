@@ -79,6 +79,21 @@ Containers created :
  
  docker compose rm
  docker image remove e580d008610b
+ 
+docker run -p 9411:9411 openzipkin/zipkin:2.23
+ 
+
+docker run -p 8761:8761 sv/twilioprj-anaming-server:0.0.1-SNAPSHOT
+ 
+docker run -p 8765:8765 sv/twilioprj-bapi-gateway:0.0.1-SNAPSHOT
+
+docker run -p 8100:8100 sv/twilioprj-ctwilioui:0.0.1-SNAPSHOT
+
+docker run -p 8000:8000 sv/twilioprj-dtwiliobackend:0.0.1-SNAPSHOT
+
+docker run -p 8200:8200 sv/twilioprj-anaming-server:0.0.1-SNAPSHOT
+ 
+ 
 
 #spring.security.user.name=abc
 #spring.security.user.password=123
