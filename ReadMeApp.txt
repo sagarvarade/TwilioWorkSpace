@@ -32,6 +32,14 @@ http://localhost:8765/ctwilioui/currency-conversion-feign/from/USD/INR/quantity/
 http://localhost:8765/dtwiliobackend/currency-exchange/from/USD/INR
 
 
+http://localhost:8000/currency-exchange/from/USD/INR
+
+http://localhost:8000/getstudent/1
+
+http://localhost:8000/currency-exchange/from/USD/INR
+
+
+
 eauthenticationApplication
 
 http://localhost:8765/eauthenticationApplication/actuator
