@@ -9,14 +9,18 @@ import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,6 +32,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class TemplateController {
 
 	private final JwtConfig jwtConfig;
@@ -84,8 +89,8 @@ public class TemplateController {
     }
     
     
-    @PostMapping("issuetoken")
-    public String getTokenForUser(@RequestBody TokenDetails token1) {
+    @RequestMapping(value ="issuetoken",method = RequestMethod.POST,consumes =MediaType.APPLICATION_JSON_VALUE)
+    public TokenGeneratedBean getTokenForUser(@RequestBody TokenDetails token1) {
     	System.out.println("token  "+token1);
     	String token="";
     	try {
@@ -97,7 +102,6 @@ public class TemplateController {
 	        
 	        ResponseEntity<String> result = restTemplate.postForEntity(uri, employee, String.class);
 	        
-	    	//String resultString = result.getBody();
 			org.springframework.http.HttpHeaders headers = result.getHeaders();
 	        System.out.println("headers String "+headers);
 	        System.out.println("headers String "+headers.get("Authorization"));
@@ -105,6 +109,7 @@ public class TemplateController {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-    	return token;
+    	System.out.println("Res  :"+token);
+    	return new TokenGeneratedBean(token1.getUsername(),token1.getPassword(),token,14);
     }
 }

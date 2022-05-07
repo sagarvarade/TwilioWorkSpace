@@ -60,7 +60,7 @@ docker.io/sv/twilioprj-eauthentication:0.0.1-SNAPSHOT
 
 
 
-
+let url ="http://192.168.1.100:8200/issuetoken";
 Containers created :
 
 [INFO] Successfully built image 'docker.io/sv/twilioprj-anaming-server:0.0.1-SNAPSHOT'
@@ -112,15 +112,8 @@ docker run -p 8200:8200 sv/twilioprj-anaming-server:0.0.1-SNAPSHOT
 #spring.datasource.driver-class-name =com.mysql.jdbc.Driver
 
 
-eauthentication:
-  #[INFO] Successfully built image 'docker.io/sv/twilioprj-eauthentication:0.0.1-SNAPSHOT'
-    image: sv/twilioprj-eauthentication:0.0.1-SNAPSHOT
-    ports:
-      - "8200:8200"
-    restart: always
-    networks:
-      - twilio-network
-    depends_on:
-      - naming-server
-    environment:
-      - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE:http://naming-server:8761/eureka
+1. Run docker run -p 9411:9411 openzipkin/zipkin:2.23
+2. Run 
+
+
+npm run serve -- --port 4000

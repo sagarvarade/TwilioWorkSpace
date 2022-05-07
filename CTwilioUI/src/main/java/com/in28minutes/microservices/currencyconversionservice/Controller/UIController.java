@@ -8,7 +8,12 @@ public class UIController {
 
 	@GetMapping(path = {"/","/login"})
 	public String getLoginPage() {
-		System.out.println("Login path");
+		System.out.println("Login path.........");
 		return "login";
+	}
+	@GetMapping(path = {"/index"})
+	public String getindexPage() {
+		System.out.println("index path.........");
+		return "index";
 	}
 }
