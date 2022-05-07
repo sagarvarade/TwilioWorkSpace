@@ -8,7 +8,7 @@
 		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.in28minutes.microservices</groupId>
+	<groupId>com.microservices</groupId>
 	<artifactId>dtwiliobackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dtwiliobackend</name>
