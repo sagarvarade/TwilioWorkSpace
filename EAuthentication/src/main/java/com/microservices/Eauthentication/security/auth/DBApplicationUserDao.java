@@ -33,11 +33,11 @@ public class DBApplicationUserDao implements ApplicationUserDao {
                 new ApplicationUser ("anna",
                          passwordEncoder.encode("pass"),
                          STUDENT.getGrantedAuthorities()),
-                new ApplicationUser ("steve",
-                         passwordEncoder.encode("pass"),
+                new ApplicationUser ("sagar",
+                         passwordEncoder.encode("sagar"),
                          ADMIN.getGrantedAuthorities()),
-                new ApplicationUser ("tom",
-                         passwordEncoder.encode("pass"),
+                new ApplicationUser ("varade",
+                         passwordEncoder.encode("varade"),
                          ADMINTRAINEE.getGrantedAuthorities())
                 );
     }

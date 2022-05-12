@@ -105,6 +105,14 @@
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5.2</version>
 		</dependency>
+			<dependency> 
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
 	</dependencies>
 	 <dependencyManagement>
 	    <dependencies>
