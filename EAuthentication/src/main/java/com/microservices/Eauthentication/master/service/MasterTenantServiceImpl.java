@@ -1,5 +1,7 @@
 package com.microservices.Eauthentication.master.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +20,14 @@ public class MasterTenantServiceImpl implements MasterTenantService {
 
     @Autowired
     MasterTenantRepository masterTenantRepo;
-
+    
     @Override
-    public MasterTenant findByTenantId(String tenantId) {
-        return masterTenantRepo.findByTenantId(tenantId);
+    public MasterTenant findByTenantIdAndMicroserviceName(String tenantId,String microserviceName) {
+        return masterTenantRepo.findByTenantIdAndMicroserviceName(tenantId,microserviceName);
     }
-
+    
+    @Override
+    public List<MasterTenant> findByMicroserviceName(String microserviceName) {
+        return masterTenantRepo.findByMicroserviceName(microserviceName);
+    }
 }

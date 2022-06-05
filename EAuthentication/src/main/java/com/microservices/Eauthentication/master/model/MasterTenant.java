@@ -53,7 +53,21 @@ public class MasterTenant {
      */
    
     private String password;
-
+    
+    
+    /*
+     * Copy name of micro service Name  from <artifactId>eauthentication</artifactId>
+     * Be aware this name used for docker 
+     */
+    private String microserviceName;
+    
+    
+    /*
+     * Valid Values are VALID and NOTVALID , its string should be used as same in all Microservices
+     */
+    private String activeOrNot;
+    
+    
     /**
      * Specifies the version field or property of an entity class that serves as
      * its optimistic lock value. The version is used to ensure integrity when

@@ -15,6 +15,8 @@
  */
 package com.microservices.Eauthentication.master.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -38,6 +40,9 @@ public interface MasterTenantRepository
      * @param tenantId
      * @return
      */
-    @Query("select p from MasterTenant p where p.tenantId = :tenantId")
-    MasterTenant findByTenantId(@Param("tenantId") String tenantId);
+    @Query("select p from MasterTenant p where p.tenantId = :tenantId and p.microserviceName=:microserviceName")
+    MasterTenant findByTenantIdAndMicroserviceName(@Param("tenantId") String tenantId,@Param("microserviceName") String microserviceName);
+
+    @Query("select p from MasterTenant p where p.microserviceName=:microserviceName")
+	List<MasterTenant> findByMicroserviceName(String microserviceName);
 }

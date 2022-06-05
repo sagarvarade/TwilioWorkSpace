@@ -1,7 +1,4 @@
-########################################################################
-##### COPYRIGHT 2018 onwards - Sunit Katkar (sunitkatkar@gmail.com)
-##### https://sunitkatkar.blogspot.com/ 
-########################################################################
+
 spring:
   main:
     allow-circular-references: true
@@ -27,7 +24,7 @@ multitenancy:
   mtapp: 
     master: 
       datasource:
-        url: jdbc:mysql://192.168.1.100:3306/public
+        url: jdbc:mysql://192.168.1.100:3306/tw_aa_masterofmasters
         username: sagar
         password: sagar
         driverClassName: com.mysql.cj.jdbc.Driver

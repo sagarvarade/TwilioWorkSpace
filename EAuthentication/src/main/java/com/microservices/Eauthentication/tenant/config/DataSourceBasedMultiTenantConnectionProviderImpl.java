@@ -51,11 +51,23 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
         // is empty. If it is then rescan master_tenant table for all tenant
         // entries.
         if (dataSourcesMtApp.isEmpty()) {
-            List<MasterTenant> masterTenants = masterTenantRepo.findAll();
-            LOG.info("11 >>>> selectAnyDataSource() -- Total tenants:" + masterTenants.size());
+            //List<MasterTenant> masterTenants = masterTenantRepo.findAll();
+        	List<MasterTenant> masterTenants = masterTenantRepo.findByMicroserviceName("eauthentication");
+            LOG.info("A1 >>>> selectAnyDataSource() -- Total tenants:" + masterTenants.size());
+            LOG.info("A2 > Creating tables for all tenatnt ");
             for (MasterTenant masterTenant : masterTenants) {
-                dataSourcesMtApp.put(masterTenant.getTenantId(),
-                        DataSourceUtil.createAndConfigureDataSource(masterTenant));
+            	LOG.info("A3 "+masterTenant.getTenantId()+" , "+masterTenant.getUsername()+" "+masterTenant.getUrl());
+            	
+            	DataSource createAndConfigureDataSource = DataSourceUtil.createAndConfigureDataSource(masterTenant);
+                dataSourcesMtApp.put(masterTenant.getTenantId(),createAndConfigureDataSource);
+                LOG.info("A4 "+masterTenant.getTenantId()+"  "+createAndConfigureDataSource);
+                
+                try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+
+					e.printStackTrace();
+				}
             }
         }
         return this.dataSourcesMtApp.values().iterator().next();
@@ -70,14 +82,15 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
         tenantIdentifier = initializeTenantIfLost(tenantIdentifier);
 
         if (!this.dataSourcesMtApp.containsKey(tenantIdentifier)) {
-        	
-            List<MasterTenant> masterTenants = masterTenantRepo.findAll();
+            //List<MasterTenant> masterTenants = masterTenantRepo.findAll();
+        	List<MasterTenant> masterTenants = masterTenantRepo.findByMicroserviceName("eauthentication");
             System.out.println("mastertenat "+masterTenants.toString());
             System.out.println("2 mastertenat "+masterTenants.get(0));
             LOG.info(
                     "22 >>>> selectDataSource() -- tenant:" + tenantIdentifier + " Total tenants:" + masterTenants.size());
             for (MasterTenant masterTenant : masterTenants) {
 				if (this.dataSourcesMtApp.containsKey(masterTenant.getTenantId())) {
+					LOG.info("Skip "+masterTenant.getTenantId()+" ...  "+tenantIdentifier);
 					continue;
 				}
                 dataSourcesMtApp.put(masterTenant.getTenantId(),
@@ -85,7 +98,7 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
             }
         }
         System.out.println(" Map "+dataSourcesMtApp.entrySet());
-        
+      
          //check again if tenant exist in map after rescan master_db, if not, throw UsernameNotFoundException
         if (!this.dataSourcesMtApp.containsKey(tenantIdentifier)) {
             LOG.warn("33 Trying to get tenant:" + tenantIdentifier + " which was not found in master db after rescan");

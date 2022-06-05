@@ -1,6 +1,8 @@
 
 package com.microservices.Eauthentication.master.service;
 
+import java.util.List;
+
 import org.springframework.data.repository.query.Param;
 
 import com.microservices.Eauthentication.master.model.MasterTenant;
@@ -15,5 +17,7 @@ import com.microservices.Eauthentication.master.model.MasterTenant;
  */
 public interface MasterTenantService {
     
-    MasterTenant findByTenantId(@Param("tenantId") String tenantId);
+    MasterTenant findByTenantIdAndMicroserviceName(@Param("tenantId") String tenantId,@Param("microserviceName") String microserviceName);
+
+    List<MasterTenant> findByMicroserviceName(@Param("microserviceName") String microserviceName);
 }

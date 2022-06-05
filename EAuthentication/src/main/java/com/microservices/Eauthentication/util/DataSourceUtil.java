@@ -26,11 +26,17 @@ public final class DataSourceUtil {
      */
     public static DataSource createAndConfigureDataSource(
             MasterTenant masterTenant) {
+    	try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         HikariDataSource ds = new HikariDataSource();
         ds.setUsername(masterTenant.getUsername());
         ds.setPassword(masterTenant.getPassword());
         ds.setJdbcUrl(masterTenant.getUrl());
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
         // HikariCP settings - could come from the master_tenant table but
         // hardcoded here for brevity
@@ -51,8 +57,16 @@ public final class DataSourceUtil {
         String tenantId = masterTenant.getTenantId();
         String tenantConnectionPoolName = tenantId + "-connection-pool";
         ds.setPoolName(tenantConnectionPoolName);
+        try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         LOG.info("Configured datasource:" + masterTenant.getTenantId()
                 + ". Connection poolname:" + tenantConnectionPoolName);
+        
+        
         return ds;
     }
 }
