@@ -124,4 +124,40 @@ docker run -p 8200:8200 sv/twilioprj-anaming-server:0.0.1-SNAPSHOT
 2. Run 
 
 
+
+Run vue app on differetnt port 
 npm run serve -- --port 4000
+
+
+
+Credits :
+
+
+https://github.com/sumanentc/multitenant   <br>
+https://github.com/sunitk/multitenancy-dynamic-tenant   <br>
+https://medium.com/@paulushc/multi-database-application-with-spring-boot-777aaf5a1e4e   <br>
+https://medium.com/@joeclever/using-multiple-datasources-with-spring-boot-and-spring-data-6430b00c02e7   <br>
+
+
+
+<artifactId>eauthentication</artifactId>
+<artifactId>dtwiliobackend</artifactId>
+
+Databases :
+
+tw_aa_masterofmasters
+
+tw_kth_eauthentication
+tw_kth_dtwiliobackend
+
+
+>>>
+http://192.168.1.100:8765/eauthenticationapplication/api/auth/signin
+{
+    "username":"sagar",
+    "password":"sagar",
+    "tenant":"tw_base_eauthentication"
+}
+
+
+http://localhost:8200/api/auth/tenant/tw_base_eauthentication
