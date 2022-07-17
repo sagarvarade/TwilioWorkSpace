@@ -17,5 +17,5 @@ public class UIController {
 	public String getindexPage() {
 		System.out.println("index path.........");
 		return "index";
-	}
+	} 
 }

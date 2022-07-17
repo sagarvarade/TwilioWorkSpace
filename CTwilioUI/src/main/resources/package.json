@@ -12,7 +12,7 @@
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --dest static",
     "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write '**/*.js'",
     "lint": "eslint . --ext .js",
     "serve": "vue-cli-service serve",
