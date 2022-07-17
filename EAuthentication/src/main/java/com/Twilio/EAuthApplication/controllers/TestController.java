@@ -15,6 +15,13 @@ public class TestController {
     return "Public Content.";
   }
 
+  @GetMapping("/verifytoken")
+  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+  public String verifytoken() {
+    return "true";
+  } 
+  
+  
   @GetMapping("/user")
   @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
   public String userAccess() {
