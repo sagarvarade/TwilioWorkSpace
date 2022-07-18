@@ -34,3 +34,4 @@ build/
 !**/src/main/resources/node_modules/
 !**/src/main/resources/.github/
 *node_modules/*
+!**/src/main/resources/static/
