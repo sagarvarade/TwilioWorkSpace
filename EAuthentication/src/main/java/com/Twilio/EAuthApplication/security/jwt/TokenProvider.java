@@ -3,9 +3,12 @@ package com.Twilio.EAuthApplication.security.jwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import net.minidev.json.JSONObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,10 +17,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import com.Twilio.EAuthApplication.security.repository.UserRepository;
+
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -33,6 +39,8 @@ public class TokenProvider implements InitializingBean {
 
    private Key key;
 
+   @Autowired
+   private UserRepository userRepo;
 
    public TokenProvider(
       @Value("${jwt.base64-secret}") String base64Secret,
@@ -54,6 +62,7 @@ public class TokenProvider implements InitializingBean {
          .map(GrantedAuthority::getAuthority)
          .collect(Collectors.joining(","));
 
+      
       long now = (new Date()).getTime();
       Date validity;
       if (rememberMe) {
@@ -62,8 +71,19 @@ public class TokenProvider implements InitializingBean {
          validity = new Date(now + this.tokenValidityInMilliseconds);
       }
 
+      Optional<com.Twilio.EAuthApplication.security.model.User> userDetails = userRepo.findOneWithAuthoritiesByUsername(authentication.getName()).stream().findFirst();
+      JSONObject userDetailsObject=new JSONObject();
+      userDetailsObject.put(AUTHORITIES_KEY, authorities);
+      userDetailsObject.put("ID", userDetails.get().getId());
+      userDetailsObject.put("EMAIL", userDetails.get().getEmail());
+      userDetailsObject.put("FIRSTNAME", userDetails.get().getFirstname());
+      userDetailsObject.put("LASTTNAME", userDetails.get().getLastname());
+      userDetailsObject.put("USERNAME", userDetails.get().getUsername());
+      userDetailsObject.put("AUTHORITIES", userDetails.get().getAuthorities());
+      
       return Jwts.builder()
-         .setSubject(authentication.getName())
+    	 .setSubject(userDetailsObject.toString())
+         //.setSubject(authentication.getName())
          .claim(AUTHORITIES_KEY, authorities)
          .signWith(key, SignatureAlgorithm.HS512)
          .setExpiration(validity)

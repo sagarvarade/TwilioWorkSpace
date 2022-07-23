@@ -1,4 +1,4 @@
-package com.microservices.currencyexchangeservice.Controllers;
+package com.microservices.dtwiliobackend.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservices.currencyexchangeservice.Controllers.Beans.CurrencyExchange;
-import com.microservices.currencyexchangeservice.Controllers.Beans.Student;
-import com.microservices.currencyexchangeservice.Controllers.Beans.dockerRepository;
-import com.microservices.currencyexchangeservice.Repository.CurrencyExchangeRepository;
+import com.microservices.dtwiliobackend.Controllers.Beans.CurrencyExchange;
+import com.microservices.dtwiliobackend.Controllers.Beans.Student;
+import com.microservices.dtwiliobackend.Controllers.Beans.dockerRepository;
+import com.microservices.dtwiliobackend.Repository.CurrencyExchangeRepository;
 
 @RestController
 public class CurrencyExchangeController {

@@ -2,6 +2,7 @@ package com.Twilio.EAuthApplication.security.rest;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ public class AuthenticationRestController {
 
    private final TokenProvider tokenProvider;
 
+   @Value("${jwt.token-validity-in-seconds}")
+   private String tokenValidityInMilliseconds;
+   
    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
    public AuthenticationRestController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
@@ -36,7 +40,7 @@ public class AuthenticationRestController {
    }
 
    @PostMapping("/authenticate")
-   public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginDto loginDto) {
+   public ResponseEntity<userLoginRecord> authorize(@Valid @RequestBody LoginDto loginDto) {
 	   System.out.println("  "+loginDto);
       UsernamePasswordAuthenticationToken authenticationToken =
          new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
@@ -49,8 +53,11 @@ public class AuthenticationRestController {
 
       HttpHeaders httpHeaders = new HttpHeaders();
       httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-
-      return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+      
+      userLoginRecord sr=new userLoginRecord(loginDto.getUsername(), tokenValidityInMilliseconds, jwt, "password");
+      
+      //return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+      return new ResponseEntity<userLoginRecord>(sr, httpHeaders, HttpStatus.OK);
    }
 
    /**
@@ -74,3 +81,5 @@ public class AuthenticationRestController {
       }
    }
 }
+
+record userLoginRecord(String username,String tokenExpiration,String token,String password) {};

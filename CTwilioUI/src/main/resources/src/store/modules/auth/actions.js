@@ -1,4 +1,5 @@
 let timer
+import URLS from '@/config/URLS'
 
 export default {
   async login(context, payload) {
@@ -14,19 +15,22 @@ export default {
     })
   },
   async auth(context, payload) {
-    const response = await fetch(
-      'http://192.168.1.100:8765/eauthenticationapplication/issuetoken',
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-        body: JSON.stringify({
-          username: payload.username,
-          password: payload.password,
-        }),
+    console.log('>>>>>>')
+    console.log(URLS)
+    console.log(URLS.LOGIN)
+    console.log(URLS.LOGIN.login)
+    console.log(URLS.LOGIN.login.URL)
+    console.log(URLS.LOGIN.login.URL.methods)
+    const response = await fetch(URLS.LOGIN.login.URL, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
       },
-    )
+      body: JSON.stringify({
+        username: payload.username,
+        password: payload.password,
+      }),
+    })
       .then((response) => response.json())
       .then((json) => {
         try {

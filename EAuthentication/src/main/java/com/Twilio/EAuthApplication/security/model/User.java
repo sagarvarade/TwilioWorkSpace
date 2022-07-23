@@ -137,15 +137,10 @@ public class User {
       return Objects.hash(id);
    }
 
-   @Override
-   public String toString() {
-      return "User{" +
-         "username='" + username + '\'' +
-         ", password='" + password + '\'' +
-         ", firstname='" + firstname + '\'' +
-         ", lastname='" + lastname + '\'' +
-         ", email='" + email + '\'' +
-         ", activated=" + activated +
-         '}';
-   }
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", email=" + email + ", activated=" + activated + ", authorities="
+				+ authorities + "]";
+	}
 }

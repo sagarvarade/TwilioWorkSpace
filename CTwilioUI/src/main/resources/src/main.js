@@ -8,11 +8,13 @@ import CIcon from '@coreui/icons-vue'
 import { iconsSet as icons } from '@/assets/icons'
 import DocsCallout from '@/components/DocsCallout'
 import DocsExample from '@/components/DocsExample'
+import APPURLS from './config/URLS'
 
 const app = createApp(App)
 app.use(store)
 app.use(router)
 app.use(CoreuiVue)
+app.use(APPURLS)
 app.provide('icons', icons)
 app.component('CIcon', CIcon)
 app.component('DocsCallout', DocsCallout)

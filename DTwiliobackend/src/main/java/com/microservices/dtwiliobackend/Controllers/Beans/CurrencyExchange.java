@@ -1,4 +1,4 @@
-package com.microservices.currencyexchangeservice.Controllers.Beans;
+package com.microservices.dtwiliobackend.Controllers.Beans;
 
 import java.math.BigDecimal;
 
