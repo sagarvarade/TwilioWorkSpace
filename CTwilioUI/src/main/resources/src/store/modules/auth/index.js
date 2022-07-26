@@ -3,11 +3,14 @@ import actions from './actions.js'
 import getters from './getters.js'
 
 export default {
+  //namespaced: true,
   state() {
     return {
-      userId: null,
+      name: 'sagar by store',
       token: null,
-      didAutoLogout: false,
+      username: null,
+      password: null,
+      tokenExpiration: null,
     }
   },
   mutations,

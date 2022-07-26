@@ -38,21 +38,6 @@
                         {{ submitButtonCaption }}
                       </CButton>
                     </CCol>
-                    <CCol :xs="5">
-                      <CButton
-                        color="primary"
-                        class="px-4"
-                        type="button"
-                        mode="flat"
-                        @click="switchAuthMode"
-                        >{{ switchModeButtonCaption }}</CButton
-                      >
-                    </CCol>
-                    <CCol :xs="6" class="text-right">
-                      <CButton color="link" class="px-0">
-                        Forgot password?
-                      </CButton>
-                    </CCol>
                   </CRow>
                 </CForm>
               </CCardBody>
@@ -78,18 +63,7 @@ export default {
   },
   computed: {
     submitButtonCaption() {
-      if (this.mode === 'login') {
-        return 'Login'
-      } else {
-        return 'Signup'
-      }
-    },
-    switchModeButtonCaption() {
-      if (this.mode === 'login') {
-        return 'Signup instead'
-      } else {
-        return 'Login instead'
-      }
+      return 'Login'
     },
   },
   methods: {
@@ -107,18 +81,10 @@ export default {
         username: this.username,
         password: this.password,
       }
-
       try {
         if (this.mode === 'login') {
           try {
             await this.$store.dispatch('login', actionPayload)
-          } catch (err) {
-            this.error = err.message || 'Failed to authenticate, try later.'
-            return
-          }
-        } else {
-          try {
-            await this.$store.dispatch('signup', actionPayload)
           } catch (err) {
             this.error = err.message || 'Failed to authenticate, try later.'
             return
@@ -129,22 +95,15 @@ export default {
       }
       setTimeout(() => {
         if (localStorage.getItem('token') == null) {
-          alert('Failed to Login')
           const redirectUrl = '/pages/Login'
           this.$router.replace(redirectUrl)
         } else {
-          const redirectUrl = '/' + (this.$route.query.redirect || 'dashboard')
+          const redirectUrl = '/dashboard'
+          console.log('Login succes ', redirectUrl)
           this.$router.replace(redirectUrl)
         }
       }, 300)
       this.isLoading = false
-    },
-    switchAuthMode() {
-      if (this.mode === 'login') {
-        this.mode = 'signup'
-      } else {
-        this.mode = 'login'
-      }
     },
     handleError() {
       this.error = null

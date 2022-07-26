@@ -1,16 +1,11 @@
 {
   "name": "@coreui/coreui-free-vue-admin-template",
   "version": "4.1.0",
-  "description": "CoreUI Free Vue Admin Template",
-  "bugs": {
-    "url": "https://github.com/coreui/coreui-free-vue-admin-template/issues"
-  },
+  "description": "##",
   "repository": {
-    "type": "git",
-    "url": "git@github.com:coreui/coreui-free-vue-admin-template.git"
+    "type": "git"
   },
   "license": "MIT",
-  "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
     "build": "vue-cli-service build --dest static",
     "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write '**/*.js'",

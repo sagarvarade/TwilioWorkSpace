@@ -82,7 +82,7 @@ public class TokenProvider implements InitializingBean {
       userDetailsObject.put("AUTHORITIES", userDetails.get().getAuthorities());
       
       return Jwts.builder()
-    	 .setSubject(userDetailsObject.toString())
+    	 .setSubject(userDetailsObject.toJSONString())
          //.setSubject(authentication.getName())
          .claim(AUTHORITIES_KEY, authorities)
          .signWith(key, SignatureAlgorithm.HS512)
